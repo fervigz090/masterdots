@@ -8,6 +8,36 @@
     <link rel="stylesheet" href="./css/estilos.css">
 </head>
 <body>
-    
+    <!-- CABECERA -->
+    <header>
+        <img src="./img/logo.png" alt="logo">
+    </header>
+    <!-- Formulario usuario -->
+    <main>
+        <form action="#">
+            /* Pedimos nombre*/
+            <div class="itemform">
+                <label for="name">Introduce tu nick: </label>
+                <input type="text" name="nick" id="nick">
+            </div>
+            /* Pedimos tamaño del juego*/
+            <div class="itemform">
+                <label for="nick">Tamaño del juego</label>
+                <select name="tamano" id="tamano">
+                    <option value="">--Por favor elige un tamaño--</option>
+                    <option value="1">4x4</option>
+                    <option value="2">5x5</option>
+                    <option value="3">6x6</option>
+                </select>
+            </div>
+            <div class="itemform">
+                <input type="submit" value="JUGAR!">
+              </div>
+        </form>
+    </main>
+    <!-- Pie de pagina -->
+    <footer>
+        <p>Curso Frontend de HTML, CSS y JS</p>
+    </footer>
 </body>
 </html>
