@@ -1,1 +1,1 @@
-alert("Ventana horripilante");
+//alert("Ventana horripilante");
