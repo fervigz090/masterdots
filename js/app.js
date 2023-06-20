@@ -10,15 +10,17 @@ const tamanoInput = document.getElementById("tamano");
 const formEntrada = document.getElementById("formEntrada");
 
 //Funciones de evento
-function comprobarForm(){
+function comprobarForm(event){
     //comprobar cambios
     if(nickInput.value.length == 0){
         console.log("No hay nick");
-        preventDefault();   //Para que no se borre
+        nickInput.focus();  //Marca el recuadro del nick
+        event.preventDefault();   //Para que no se borre
         return false;
     }else if(tamanoInput.value == "0"){
         console.log("No se ha seleccionado tamaño de panel");
-        preventDefault();   //Para que no se borre
+        tamanoInput.focus();    //Marca el cuadro del tamaño
+        event.preventDefault();   //Para que no se borre
         return false;
     }
     return true;
