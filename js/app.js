@@ -4,17 +4,27 @@
  * JS para la comprobación de datos del formulario de entrada
  */
 
-// Capturar el valor del input nick
-const nickInput = document.getElementById('nick');
-console.log(nickInput.nodeType);
-console.log(nickInput.value);
+//Inicializacion de variables y objetos
+const nickInput = document.getElementById("nick");
+const tamanoInput = document.getElementById("tamano");
+const formEntrada = document.getElementById("formEntrada");
 
-// Capturar el valor del select
-const tamanoInput = document.getElementById('tamano');
-console.log(tamanoInput.value);
-console.log(tamanoInput.options[tamanoInput.selectedIndex].text);
-
-// Ejemplo sobre eventos
-function test(){
-    console.log("Evento sobre raton");
+//Funciones de evento
+function comprobarForm(){
+    //comprobar cambios
+    if(nickInput.value.length == 0){
+        console.log("No hay nick");
+        preventDefault();   //Para que no se borre
+        return false;
+    }else if(tamanoInput.value == "0"){
+        console.log("No se ha seleccionado tamaño de panel");
+        preventDefault();   //Para que no se borre
+        return false;
+    }
+    return true;
 }
+
+//Inicio de carga de eventos
+formEntrada.addEventListener('submit', comprobarForm);
+
+
