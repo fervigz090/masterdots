@@ -24,9 +24,9 @@
         <form action="juego.html" id="formEntrada">
             <!--Pedimos nombre-->
             <div class="itemform">
-                <label for="nick">introduce tu nick</label>
+                <label for="nick">introduce tu nick*</label>
                 <input type="text" name="nick" value="@" id="nicka" readonly>
-                <input type="text" name="nick" id="nick">
+                <input type="text" name="nick" id="nick" required minlength="2">
             </div>
             <!--Pedimos correo electronico-->
             <div class="itemform">
@@ -35,13 +35,16 @@
             </div>
             <!--Pedimos tamaño del juego-->
             <div class="itemform">
-                <label for="tamano">tamaño del juego</label>
-                <select name="tamano" id="tamano">
+                <label for="tamano">tamaño del juego*</label>
+                <select name="tamano" id="tamano" required>
                     <option value="0">--Por favor elige un tamaño--</option>
                     <option value="1">4x4</option>
                     <option value="2">5x5</option>
                     <option value="3">6x6</option>
                 </select>
+            </div>
+            <div class="itemform">
+                <p>*Campos obligatorios</p>
             </div>
             <div class="itemform">
                 <input type="submit" value="JUGAR" id="jugar">
