@@ -2,6 +2,10 @@
 
 /**
  * JS para la comprobación de datos del formulario de entrada
+ * 
+ * @author Iván Fernández <ivanfdez@live.com> 
+ * {@link https://github.com/fervigz090/masterdots.git}
+ * @date 2023-06-22
  */
 
 //Inicializacion de variables y objetos
@@ -18,6 +22,11 @@ if(sessionStorage.getItem('error')){
 }
 
 //Funciones de evento
+/**
+ * Comprueba que el formulario cumple los requisitos
+ * @date 2023-06-22
+ * @param { * } event evento presionar 'submit'
+ */
 function comprobarForm(event){
     //Comprobar cambios. La expresion regular de la condicion del if
     //se cumple si el campo nick no comienza con un numero.

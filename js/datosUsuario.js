@@ -1,14 +1,27 @@
 /**
  * JS para la gestion de los datos de usuario.
  * (se utiliza en index.html y en juego.html).
+ * 
+ * @author Iván Fernández <ivanfdez@live.com> 
+ * {@link https://github.com/fervigz090/masterdots.git}
+ * @date 2023-06-22
  */
+
 var nick;
 var tamano;
 var email;
 var geolocalizacionTxt;
 
+//Cmd+shift+p para añadir "JSdoc" automaticamente
+/**
+ * Almacenar los datos en el sessionStorage
+ * @date 2023-06-22
+ * @param { HTMLElement } nick nick del usuario
+ * @param { HTMLElement } tamano tamaño del panel
+ * @param { HTMLElement } email correo electronico del usuario
+ */
 function datosUsuario(nick, tamano, email){
-    //Almacenamos el nick con la clave 'nick' con sessionStorage
+    //Almacenamos el nick con la clave 'nick'
     sessionStorage.setItem('nick', nick.value);
     sessionStorage.setItem('tamano', tamano.value);
     sessionStorage.setItem('email', email.value);
@@ -18,6 +31,10 @@ function datosUsuario(nick, tamano, email){
     //localStorage.setItem('nick', nick.value);
 }
 
+/**
+ * Devuelve por consola el nick del usuario
+ * @date 2023-06-22
+ */
 function getDatosUsuario(){
     nick = sessionStorage.getItem('nick');
     console.log(nick);
@@ -28,6 +45,10 @@ function getDatosUsuario(){
     //console.log(name);
 }
 
+/**
+ * Devuelve true si los datos de entrada son correctos
+ * @date 2023-06-22
+ */
 function comprobacionDatosUsuario() {
     if(nick == null){
         sessionStorage.setItem('error', "No se ha rellenado el formulario correctamente");
@@ -37,6 +58,10 @@ function comprobacionDatosUsuario() {
 }
 
 //Geolocalizacion
+/**
+ * Devuelve la geolocalizacion del usuario si es posible obtenerla
+ * @date 2023-06-22
+ */
 function datoGeolocalizacion(){
     if(!navigator.geolocation){
         geolocalizacionTxt = "El navegador no es compatible con API Geolocation";
@@ -51,6 +76,11 @@ function datoGeolocalizacion(){
 }
 
 //localStorage
+/**
+ * Almacena un historico de usuarios en localStorage
+ * @date 2023-06-22
+ * @param { HTMLElement } nick nick del usuario actual
+ */
 function historicoUsuarios(nick) {
     let historicoStorage = localStorage.getItem('historico');
     let historico;
