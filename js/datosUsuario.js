@@ -37,12 +37,8 @@ function datosUsuario(nick, tamano, email){
  */
 function getDatosUsuario(){
     nick = sessionStorage.getItem('nick');
-    console.log(nick);
-
-    // Ahora devolvemos el almacenado en localStorage para ver la diferencia
-    // En localStorage se queda almacenado aunque cerremos la pestaña
-    //name = localStorage.getItem('nick');
-    //console.log(name);
+    tamano = sessionStorage.getItem('tamano');
+    email = sessionStorage.getItem('email');
 }
 
 /**

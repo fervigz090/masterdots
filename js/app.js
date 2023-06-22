@@ -9,17 +9,11 @@
  */
 
 //Inicializacion de variables y objetos
-const nickInput = document.getElementById("nick");
-const tamanoInput = document.getElementById("tamano");
-const emailInput = document.getElementById("email");
-const formEntrada = document.getElementById("formEntrada");
-const error = document.getElementById("error");
-
-//Comprobar si hay algun error de juego.html
-if(sessionStorage.getItem('error')){
-    error.innerText = sessionStorage.getItem('error');
-    sessionStorage.removeItem('error'); //lo eliminamos para que desaparezca al recargar.
-}
+var nickInput;
+var tamanoInput;
+var emailInput;
+var formEntrada;
+var error;
 
 //Funciones de evento
 /**
@@ -31,13 +25,11 @@ function comprobarForm(event){
     //Comprobar cambios. La expresion regular de la condicion del if
     //se cumple si el campo nick no comienza con un numero.
     if(nickInput.value.match(/(?<!\s)[0-9]/)){ //
-        console.log("nick incorrecto");
         nickInput.focus();  //Marca el recuadro del nick
         event.preventDefault();   //Para que no se borre
         error.innerText = "El campo de nick no puede comenzar con un numero"
         return false;
     }else if(tamanoInput.value == "0"){
-        console.log("No se ha seleccionado tamaño de panel");
         tamanoInput.focus();    //Marca el cuadro del tamaño
         event.preventDefault();   //Para que no se borre
         error.innerText = "Se debe seleccionar un tamaño de panel"
@@ -49,8 +41,29 @@ function comprobarForm(event){
     return true;
 }   
 
+/**
+ * Carga de objetos del DOM comprobaciones y eventos del formulario
+ * @date 2023-06-22
+ */
+function domCargado(){
+    //Captura de todos los Elements
+    nickInput = document.getElementById("nick");
+    tamanoInput = document.getElementById("tamano");
+    emailInput = document.getElementById("email");
+    formEntrada = document.getElementById("formEntrada");
+    error = document.getElementById("error");
+
+    //Comprobar su hay algun tipo de error de juego.html
+    if(sessionStorage.getItem('error') != null){
+        error.innerText = sessionStorage.getItem('error');
+        sessionStorage.removeItem('error'); //lo eliminamos para que desaparezca al recargar.
+    }
+
+    formEntrada.addEventListener('submit', comprobarForm);
+}
+
 //Inicio de carga de eventos
-formEntrada.addEventListener('submit', comprobarForm);
+document.addEventListener('DOMContentLoaded', domCargado);
 
 //Geolocalizacion
 datoGeolocalizacion();
