@@ -3,10 +3,16 @@
  * (se utiliza en index.html y en juego.html).
  */
 var nick;
+var tamano;
+var email;
+var geolocalizacionTxt;
 
-function datosUsuario(nick){
+function datosUsuario(nick, tamano, email){
     //Almacenamos el nick con la clave 'nick' con sessionStorage
     sessionStorage.setItem('nick', nick.value);
+    sessionStorage.setItem('tamano', tamano.value);
+    sessionStorage.setItem('email', email.value);
+    sessionStorage.setItem('geolocalizacionTxt', geolocalizacionTxt);
 
     //Almacenamos el nick con la clave 'nick' con localStorage
     //localStorage.setItem('nick', nick.value);
@@ -28,6 +34,20 @@ function comprobacionDatosUsuario() {
         return false;
     }
     return true;
+}
+
+//Geolocalizacion
+function datoGeolocalizacion(){
+    if(!navigator.geolocation){
+        geolocalizacionTxt = "El navegador no es compatible con API Geolocation";
+    }else{
+        navigator.geolocation.getCurrentPosition(
+            //Exito
+            (position)=>{geolocalizacionTxt = 'Latitud: '+position.coords.latitude+', longitud: '+position.coords.longitude},
+            //Error
+            ()=>{geolocalizacionTxt = "La geolocalizacion no se ha podido realizar";}
+        )
+    }
 }
 
 //localStorage
