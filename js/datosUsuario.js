@@ -10,9 +10,6 @@ function datosUsuario(nick){
 
     //Almacenamos el nick con la clave 'nick' con localStorage
     //localStorage.setItem('nick', nick.value);
-
-
-
 }
 
 function getDatosUsuario(){
@@ -35,9 +32,18 @@ function comprobacionDatosUsuario() {
 
 //localStorage
 function historicoUsuarios(nick) {
-    let registroUsuario = {
-        usuario : nick.value,
-        fecha : Date.now()
+    let historicoStorage = localStorage.getItem('historico');
+    let historico;
+    if(historicoStorage == null){
+        historico = [];
+    }else{
+        historico = JSON.parse(historicoStorage);
     }
-    localStorage.setItem('historico', JSON.stringify(registroUsuario));
+    let registroUsuario = {
+        usuario:nick.value,
+        fecha:Date.now()
+    }
+    
+    historico.push(registroUsuario);    //Almacenamos registros en este array
+    localStorage.setItem('historico', JSON.stringify(historico));
 }
