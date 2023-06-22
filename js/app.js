@@ -10,6 +10,12 @@ const tamanoInput = document.getElementById("tamano");
 const formEntrada = document.getElementById("formEntrada");
 const error = document.getElementById("error");
 
+//Comprobar si hay algun error de juego.html
+if(sessionStorage.getItem('error')){
+    error.innerText = sessionStorage.getItem('error');
+    sessionStorage.removeItem('error'); //lo eliminamos para que desaparezca al recargar.
+}
+
 //Funciones de evento
 function comprobarForm(event){
     //Comprobar cambios. La expresion regular de la condicion del if
@@ -27,6 +33,8 @@ function comprobarForm(event){
         error.innerText = "Se debe seleccionar un tamaño de panel"
         return false;
     }
+    //Todo correcto
+    datosUsuario(nickInput);
     return true;
 }   
 
