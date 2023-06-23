@@ -14,6 +14,9 @@ var tamanoInput;
 var emailInput;
 var formEntrada;
 var error;
+var avatarItems;
+var itemImg;
+var avatarCont;
 
 //Funciones de evento
 /**
@@ -41,6 +44,15 @@ function comprobarForm(event){
     return true;
 }   
 
+function moviendoImg(event) {
+    itemImg = event.target;
+    console.log(itemImg.src);
+}
+
+function cambiarImg(event){
+    avatarCont.src = itemImg.src;
+}
+
 /**
  * Carga de objetos del DOM comprobaciones y eventos del formulario
  * @date 2023-06-22
@@ -60,6 +72,16 @@ function domCargado(){
     }
 
     formEntrada.addEventListener('submit', comprobarForm);
+
+    avatarItems = document.getElementsByClassName("avatarImgItem");
+    //Eventos del D&D (Drag and Drop)
+    //Añadimos el evento dragstart a cada uno de los avatares.
+    for(let item of avatarItems){
+        item.addEventListener('dragstart', moviendoImg);
+    }
+    avatarCont = document.getElementById("avatarImg");
+    avatarCont.addEventListener('dragover', e=>{e.preventDefault()})
+    avatarCont.addEventListener('drop', cambiarImg);
 }
 
 //Inicio de carga de eventos

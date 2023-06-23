@@ -11,8 +11,8 @@ header, footer{
 }
 
 main{
-    width: 400px;
     margin: 30px auto 0px auto;
+    width: 300px;
 }
 
 form{
@@ -38,6 +38,14 @@ input{
     font-size: 18px;
 }
 
+input[type="email"]{
+    border: 1px solid #ced4da;
+    font-weight: 200;
+    font-size:18px;
+    border-radius: 5px;
+    width: 278px;
+}
+
 input[type="submit"]{
     background-color: #fd0c49;
     color: #fff;
@@ -53,6 +61,25 @@ select{
     border-radius: 5px;
     font-weight: 200;
     font-size: 18px;
+}
+
+p{
+    font-weight: 100;
+    font-size: 14px;
+}
+
+footer{
+    font-weight: 100;
+}
+
+.avatarItem{
+    background-color: #fff;
+    border: solid 1px #fd0c49;
+    border-radius: 5px;
+    width: 40px;
+    height: 40px;
+    padding-top: 5px;
+    padding-left: 5px;
 }
 
 /*IDs*/
@@ -76,4 +103,29 @@ select{
     font-size: 14px;
     margin-top: 10px;
     margin-bottom: 10px;
+}
+
+#avatar{
+    float: left;
+}
+
+#avatarContainer{
+    display: flex;
+    background-color: #fff;
+    border: solid 1px #fd0c49;
+    border-radius: 5px;
+    width: 125px;
+    height: 125px;
+    justify-content: center;
+    align-items: center;
+    margin-right: 10px;
+}
+
+#avatargrid{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 5px;
+    margin-top: 30px;
 }
