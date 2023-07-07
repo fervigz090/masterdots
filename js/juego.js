@@ -6,6 +6,12 @@
  * @date 2023-06-22
  */
 
+/* Variables glabales */
+var iniciadoMarcado = false;
+var adyacentes = [];
+var tamanoPanel;
+
+
 /**
  * Devuelve un numero aleatorio entre 0 y max
  * @date 2023-07-07
@@ -18,6 +24,7 @@ function getRamdomInt(max){
 function rellenarFormularioUsuario(){
     document.getElementById("nick").value = nick;
     document.getElementById("avatarImg").src = avatarImg;
+    tamanoPanel = parseInt(tamano);
 }
 
 function pintarPanelJuego(){
@@ -32,9 +39,22 @@ function pintarPanelJuego(){
         if(index%2 > 0){
             colorRnd = getRamdomInt(2);
         }
-        items += `<div class="containerItem"><div class="item ${color[colorRnd]}"></div></div>`;
+        items += `<div class="containerItem"><div id="${index}" class="item ${color[colorRnd]}"></div></div>`;
     }
     document.getElementById("juego").innerHTML = items;
+}
+
+function calcularAdyacentes(idMarcado) {
+    adyacentes = [];
+    //Adyacente superior
+    if((idMarcado-tamanoPanel) >= 0) {adyacentes.push(idMarcado-tamanoPanel);}
+    //Adyacente inferior
+    if((idMarcado+tamanoPanel) < (tamanoPanel*tamanoPanel)) {adyacentes.push(idMarcado+tamanoPanel);}
+    //Adyacente izquierda
+    if((idMarcado%tamanoPanel) > 0) {adyacentes.push(idMarcado - 1);}
+    //Adyacente derecha
+    if(((idMarcado+1)%tamanoPanel) > 0) {adyacentes.push(idMarcado + 1);}
+    
 }
 
 /**
@@ -45,7 +65,9 @@ function programarEventosJuego() {
     const items = document.getElementsByClassName('item');
     for (let item of items){
         item.addEventListener('mousedown', comenzarMarcar);
+        item.addEventListener('mouseover', continuarMarcando);
     }
+    document.addEventListener('mouseup', finalizarMarcado);
 }
 
 /* Funciones del juego*/
@@ -60,8 +82,34 @@ function comenzarMarcar(event) {
     let containerItem = event.target.parentElement;
     if(item.classList.contains('rojo')) containerItem.classList.add('rojo');
     else containerItem.classList.add('verde');
-    
-    console.log("Pinchado sobre un circulo");
+    if(!iniciadoMarcado) {iniciadoMarcado = true;}
+    console.log("Comenzar a marcar");
+}
+
+/**
+ * Continua el marcado de los dots
+ * @date 2023-07-07
+ * @param { * } event mouseover
+ */
+function continuarMarcando(event) {
+    if(iniciadoMarcado){
+        let item = event.target;
+        let containerItem = event.target.parentElement;
+        if(item.classList.contains('rojo')) containerItem.classList.add('rojo');
+        else containerItem.classList.add('verde');
+        calcularAdyacentes(parseInt(item.id));
+    }
+    console.log("Continuar marcando");
+}
+
+/**
+ * Finaliza el marcado de los dots
+ * @date 2023-07-07
+ * @param { * } event mouseup
+ */
+function finalizarMarcado(event){
+    iniciadoMarcado = false;
+    console.log("Marcado finalizado");
 }
 
 //Capturamos los datos del usuario
