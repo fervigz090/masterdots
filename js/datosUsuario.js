@@ -11,6 +11,7 @@ var nick;
 var tamano;
 var email;
 var geolocalizacionTxt;
+var avatarImg;
 
 //Cmd+shift+p para añadir "JSdoc" automaticamente
 /**
@@ -20,12 +21,13 @@ var geolocalizacionTxt;
  * @param { HTMLElement } tamano tamaño del panel
  * @param { HTMLElement } email correo electronico del usuario
  */
-function datosUsuario(nick, tamano, email){
+function datosUsuario(nick, tamano, email, avatarCont){
     //Almacenamos el nick con la clave 'nick'
     sessionStorage.setItem('nick', nick.value);
     sessionStorage.setItem('tamano', tamano.value);
     sessionStorage.setItem('email', email.value);
     sessionStorage.setItem('geolocalizacionTxt', geolocalizacionTxt);
+    sessionStorage.setItem('avatarImg', avatarCont.src);
 
     //Almacenamos el nick con la clave 'nick' con localStorage
     //localStorage.setItem('nick', nick.value);
@@ -39,6 +41,7 @@ function getDatosUsuario(){
     nick = sessionStorage.getItem('nick');
     tamano = sessionStorage.getItem('tamano');
     email = sessionStorage.getItem('email');
+    avatarImg = sessionStorage.getItem('avatarImg');
 }
 
 /**
