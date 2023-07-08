@@ -12,6 +12,7 @@ var adyacentes = [];
 var idMarcados = [];
 var classMarcada;
 var tamanoPanel;
+var idInterval;
 
 
 /**
@@ -46,6 +47,11 @@ function pintarPanelJuego(){
     document.getElementById("juego").innerHTML = items;
 }
 
+/**
+ * Calcula los adyacentes de cada item marcado
+ * @date 2023-07-08
+ * @param { * } idMarcado Array con los id de los items marcados
+ */
 function calcularAdyacentes(idMarcado) {
     adyacentes = [];
     //Adyacente superior
@@ -60,6 +66,27 @@ function calcularAdyacentes(idMarcado) {
 }
 
 /**
+ * Realiza el conteo hacia atras del juego
+ * @date 2023-07-08
+ */
+function cuentaAtras(){
+    let tmpoRestante = parseInt(document.getElementById("tmpo").value) - 1;
+    document.getElementById("tmpo").value = tmpoRestante;
+    //Cuando el reloj llega a 0
+    if(tmpoRestante == 0){
+        //Paramos el contador
+        clearInterval(idInterval);
+        //Finalizar todos los eventos
+        const items = document.getElementsByClassName('item');
+        for (let item of items){
+            item.removeEventListener('mousedown', comenzarMarcar);
+            item.removeEventListener('mouseover', continuarMarcando);
+        }
+        document.removeEventListener('mouseup', finalizarMarcado);
+    }
+}
+
+/**
  * Añadir los eventos al juego
  * @date 2023-07-07
  */
@@ -70,6 +97,8 @@ function programarEventosJuego() {
         item.addEventListener('mouseover', continuarMarcando);
     }
     document.addEventListener('mouseup', finalizarMarcado);
+    //Cuenta atras
+    idInterval = setInterval(cuentaAtras, 1000);
 }
 
 /* Funciones del juego*/
