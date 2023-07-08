@@ -24,12 +24,20 @@ function getRamdomInt(max){
     return Math.floor(Math.random() * max);
 }
 
+/**
+ * Coge los datos del formulario.
+ * @date 2023-07-08
+ */
 function rellenarFormularioUsuario(){
     document.getElementById("nick").value = nick;
     document.getElementById("avatarImg").src = avatarImg;
     tamanoPanel = parseInt(tamano);
 }
 
+/**
+ * Dimensiona el tablero
+ * @date 2023-07-08
+ */
 function pintarPanelJuego(){
     document.getElementById("juego").style.gridTemplateColumns = "repeat("+tamano+", 1fr)";
     document.getElementById("juego").style.gridTemplateRows = "repeat("+tamano+", 1fr)";
@@ -84,6 +92,7 @@ function cuentaAtras(){
         }
         document.removeEventListener('mouseup', finalizarMarcado);
         //Cambiar z-index de los paneles
+        document.getElementById('juegoAcabado').classList.add('juegoAcabadoColor');
         document.getElementById('juegoAcabado').style.zIndex = 2;
         document.getElementById('juego').style.zIndex = 1;
         document.getElementById('nuevaPartida').addEventListener("click",(e)=>location.reload());
