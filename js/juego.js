@@ -134,6 +134,12 @@ function continuarMarcando(event) {
  */
 function finalizarMarcado(event){
     iniciadoMarcado = false;
+    adyacentes = [];
+    //Añadimos puntuacion
+    const puntuacionInput = document.getElementById("puntuacion");
+    if(idMarcados.length > 1){
+        puntuacionInput.value = parseInt(puntuacionInput.value) + idMarcados.length;
+    }
     //Trabajar con los marcados
     for (let index = 0; index < idMarcados.length; index++) {
         //capturar el objeto
@@ -145,6 +151,7 @@ function finalizarMarcado(event){
         itemMarcado.classList.remove(classMarcada);
         itemMarcado.classList.add(color[colorRnd]);
     }
+    idMarcados = [];
     console.log("Marcado finalizado");
 }
 
