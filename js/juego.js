@@ -9,6 +9,8 @@
 /* Variables glabales */
 var iniciadoMarcado = false;
 var adyacentes = [];
+var idMarcados = [];
+var classMarcada;
 var tamanoPanel;
 
 
@@ -80,9 +82,20 @@ function programarEventosJuego() {
 function comenzarMarcar(event) {
     let item = event.target;
     let containerItem = event.target.parentElement;
-    if(item.classList.contains('rojo')) containerItem.classList.add('rojo');
-    else containerItem.classList.add('verde');
+    if(item.classList.contains('rojo')) {
+        containerItem.classList.add('rojo');
+        classMarcada = 'rojo';
+    }
+    else {
+        containerItem.classList.add('verde');
+        classMarcada = 'verde';
+    }
     if(!iniciadoMarcado) {iniciadoMarcado = true;}
+
+    //Guardar los marcados
+    idMarcados.push(parseInt(item.id));
+    //Calcular adyancentes
+    calcularAdyacentes(parseInt(item.id));
     console.log("Comenzar a marcar");
 }
 
@@ -94,10 +107,22 @@ function comenzarMarcar(event) {
 function continuarMarcando(event) {
     if(iniciadoMarcado){
         let item = event.target;
-        let containerItem = event.target.parentElement;
-        if(item.classList.contains('rojo')) containerItem.classList.add('rojo');
-        else containerItem.classList.add('verde');
-        calcularAdyacentes(parseInt(item.id));
+        let idNuevo = parseInt(item.id);
+
+        // Seguimos marcando solo si es adyacente
+        if(adyacentes.includes(idNuevo) && item.classList.contains(classMarcada)){
+            let containerItem = event.target.parentElement;
+            if(item.classList.contains('rojo')) {
+                containerItem.classList.add('rojo');
+            }
+            else {
+                containerItem.classList.add('verde');
+            }
+            //Guardar los marcados
+            idMarcados.push(parseInt(item.id));
+            //Calcular los adyacentes de nuevo
+            calcularAdyacentes(parseInt(item.id));
+        }
     }
     console.log("Continuar marcando");
 }
@@ -109,6 +134,17 @@ function continuarMarcando(event) {
  */
 function finalizarMarcado(event){
     iniciadoMarcado = false;
+    //Trabajar con los marcados
+    for (let index = 0; index < idMarcados.length; index++) {
+        //capturar el objeto
+        let itemMarcado = document.getElementById(idMarcados[index]);
+        itemMarcado.parentElement.classList.remove(classMarcada);
+        //Cambiar el color de los objetos de forma aleatoria
+        let color = ['rojo', 'verde'];
+        let colorRnd = getRamdomInt(2);
+        itemMarcado.classList.remove(classMarcada);
+        itemMarcado.classList.add(color[colorRnd]);
+    }
     console.log("Marcado finalizado");
 }
 
